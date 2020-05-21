@@ -33,7 +33,7 @@ products_schema = ProductSchema(many=True)
 
 
 # Create a Product
-@connex_app.route('/product', methods=['POST'])
+@connex_app.route('/product/', methods=['POST'])
 def add_product():
     name = request.json['name']
     description = request.json['description']
@@ -49,7 +49,7 @@ def add_product():
 
 
 # Get All Products
-@connex_app.route('/product', methods=['GET'])
+@connex_app.route('/product/', methods=['GET'])
 def get_products():
     all_products = Product.query.all()
     result = products_schema.dump(all_products)
@@ -64,7 +64,7 @@ def get_product(id):
 
 
 # Update a Product
-@connex_app.route('/product/<id>', methods=['PUT'])
+@connex_app.route('/product/<id>/', methods=['PUT'])
 def update_product(id):
     product = Product.query.get(id)
 
@@ -84,7 +84,7 @@ def update_product(id):
 
 
 # Delete Product
-@connex_app.route('/product/<id>', methods=['DELETE'])
+@connex_app.route('/product/<id>/', methods=['DELETE'])
 def delete_product(id):
     product = Product.query.get(id)
     db.session.delete(product)

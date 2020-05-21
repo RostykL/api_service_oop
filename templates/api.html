@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background-color: lightcyan;
+        }
+        .main {
+          margin-top: 100px;
+          text-align: center;
+        }
+
+        .inner {
+          padding: 10px;
+          background-color: lightskyblue;
+          height: 500px;
+          display: inline-block;
+        }
+        .inner > div > p {
+          padding: 5px;
+          float: left;
+        }
+        a {
+          text-decoration: white;
+          color: black;
+        }
+        a:hover {
+            color: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="inner">
+            <div class="GET">
+                <p>To get all elements use: <a href="http://0.0.0.0:5000/product">http://0.0.0.0:5000/product</a></p>
+            </div>
+            <div class="POST">
+                <p>To post a new product use:  <a href="http://0.0.0.0:5000/product">http://0.0.0.0:5000/product</a></p>
+            </div>
+            <div class="PUT">
+                <p>To update a new product use:  <a href="http://0.0.0.0:5000/product/<id>">http://0.0.0.0:5000/product/product_id</a></p>
+            </div>
+            <div class="DELETE">
+                <p>To delete a new product use:  <a href="http://0.0.0.0:5000/product/<id>">http://0.0.0.0:5000/product/product_id</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

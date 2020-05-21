@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PetFinder</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .grid {
+          padding: 5px;
+          display: grid;
+          grid-template-rows: 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-gap: 1vw;
+          background-color: lightcyan;
+          height: 400px;
+          overflow-y: scroll;
+
+        }
+        .grid > .element {
+          font-size: 1.2em;
+          text-align: center;
+          background-color: lightblue;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="grid">
+        {% for x in range(length) %}
+            <div class="element">
+                <p>name: {{ data[x].name }}</p>
+                <p>desc: {{ data[x].description }}</p>
+                <p>qty: {{ data[x].qty }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
