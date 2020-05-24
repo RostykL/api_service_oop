@@ -3,91 +3,104 @@ import config
 
 from config import db, ma
 
-connex_app=config.connex_app
+connex_app = config.connex_app
 
 
-# Product Class/Model
-class Product(db.Model):
+
+
+
+# Animal Class/Model
+class Animal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=False)
     description = db.Column(db.String(200))
-    price = db.Column(db.Float)
-    qty = db.Column(db.Integer)
+    animal_type = db.Column(db.String(20))
+    location = db.Column(db.String(200))
+    hasOwner = db.Column(db.String(200), default="No Owner")
+    status = db.Column(db.Boolean, default=False)
 
-    def __init__(self, name, description, price, qty):
+    def __init__(self, name, description, animal_type, location, hasOwner, status):
         self.name = name
         self.description = description
-        self.price = price
-        self.qty = qty
+        self.animal_type = animal_type
+        self.location = location
+        self.hasOwner = hasOwner
+        self._status = status
 
 
-# Product Schema
-class ProductSchema(ma.Schema):
+# Animal Schema
+class AnimalSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'description', 'price', 'qty')
+        fields = ('id', 'name', 'description', 'animal_type', 'location', 'hasOwner', 'status')
 
 
 # Init schema
-product_schema = ProductSchema()
-products_schema = ProductSchema(many=True)
+animal_schema = AnimalSchema()
+animals_schema = AnimalSchema(many=True)
 
 
-# Create a Product
-@connex_app.route('/product/', methods=['POST'])
-def add_product():
+# Create a Pet
+@connex_app.route('/pets/', methods=['POST'])
+def add_animal():
     name = request.json['name']
     description = request.json['description']
-    price = request.json['price']
-    qty = request.json['qty']
+    animal_type = request.json['animal_type']
+    location = request.json['location']
+    hasOwner = request.json['hasOwner']
+    new_status = request.json['status']
 
-    new_product = Product(name, description, price, qty)
+    new_animal = Animal(name, description, animal_type, location, hasOwner, new_status)
 
-    db.session.add(new_product)
+    db.session.add(new_animal)
     db.session.commit()
 
-    return product_schema.jsonify(new_product)
+    return animal_schema.jsonify(new_animal)
 
 
-# Get All Products
-@connex_app.route('/product/', methods=['GET'])
-def get_products():
-    all_products = Product.query.all()
-    result = products_schema.dump(all_products)
+# Get All Animals
+@connex_app.route('/pets/', methods=['GET'])
+def get_animal():
+    all_animal = Animal.query.all()
+    result = animals_schema.dump(all_animal)
     return jsonify(result)
 
 
-# Get Single Products
-@connex_app.route('/product/<id>', methods=['GET'])
-def get_product(id):
-    product = Product.query.get(id)
-    return product_schema.jsonify(product)
+# Get Single Animal
+@connex_app.route('/pets/<id>/', methods=['GET'])
+def post_animal(id):
+    animal = Animal.query.get(id)
+    return animal_schema.jsonify(animal)
 
 
-# Update a Product
-@connex_app.route('/product/<id>/', methods=['PUT'])
-def update_product(id):
-    product = Product.query.get(id)
+# Update a l
+@connex_app.route('/pets/<id>/', methods=['PUT'])
+def update_animal(id):
+    animal = Animal.query.get(id)
 
     name = request.json['name']
     description = request.json['description']
-    price = request.json['price']
-    qty = request.json['qty']
+    animal_type = request.json['animal_type']
+    location = request.json['location']
+    hasOwner = request.json['hasOwner']
+    set_status = request.json['status']
 
-    product.name = name
-    product.description = description
-    product.price = price
-    product.qty = qty
+    animal.name = name
+    animal.description = description
+    animal.animal_type = animal_type
+    animal.location = location
+    animal._status = set_status
+    animal.hasOwner = hasOwner
 
     db.session.commit()
 
-    return product_schema.jsonify(product)
+    return animal_schema.jsonify(animal)
 
 
-# Delete Product
-@connex_app.route('/product/<id>/', methods=['DELETE'])
-def delete_product(id):
-    product = Product.query.get(id)
-    db.session.delete(product)
+# Delete Animal
+@connex_app.route('/pets/<id>/', methods=['DELETE'])
+def delete_animal(id):
+    animal = Animal.query.get(id)
+    db.session.delete(animal)
     db.session.commit()
 
-    return product_schema.jsonify(product)
+    return animal_schema.jsonify(animal)

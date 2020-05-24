@@ -8,7 +8,7 @@ connex_app = config.connex_app
 
 @connex_app.route('/')
 def home_page():
-    url = 'http://localhost:5000/product'
+    url = 'http://localhost:5000/pets'
     response = requests.get(url)
     data = response.json()
     data_len = len(data)

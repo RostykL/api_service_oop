@@ -10,7 +10,7 @@ connex_app=connexion.App(__name__, specification_dir=basedir)
 main_app = connex_app.app
 
 # Database
-main_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+main_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'apiServiceDB.sqlite')
 main_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Init db
 db = SQLAlchemy(main_app)
