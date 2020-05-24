@@ -1,6 +1,6 @@
 import requests
 
-
+# клас який повертає всіх тварин з нашого апі через url яке йому надано
 class Get_All_Pets_From_Api:
 
     def __init__(self, url):
@@ -14,16 +14,13 @@ class Get_All_Pets_From_Api:
         data = response.json()
         return data
 
-
+# клас який фільтрує всіх тварин і повертає тільки тих в яких немає господара, реалізовано DIP,
+# залежність Get_All_Pets_From_Api передана не на пряму, а як параметр в __init__
 class Get_Pets_With_No_Owners:
 
     def __init__(self, get_all_pets_from_api):
         self.get_all_pets_from_api = get_all_pets_from_api
 
-    def filter_owners(pet):
-        if not pet.hasOwner:
-            return True
-        return True
 
     def return_pet_with_no_owners(self):
         pets = list(filter(lambda x: x['hasOwner'] == 0, self.get_all_pets_from_api.return_data()))
@@ -33,15 +30,6 @@ class Get_Pets_With_No_Owners:
         else:
             return pets
 
-class Adoption:
-
-    def __init__(self, pets):
-        self.pets = pets
-
-    def info(self, name, pet_name):
-        print(name, 'adopted a pet', pet_name)
-
-    def remove_pet_from_api(self, id):
-        requests.delete("http://0.0.0.0:5000/pets/{0}".format(id))
-
-
+# викликає delete method, який видаляє елемент в базі даних
+def remove_pet_from_api(id):
+    requests.delete("http://0.0.0.0:5000/pets/{0}/".format(id))

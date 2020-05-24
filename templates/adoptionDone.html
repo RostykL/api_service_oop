@@ -28,30 +28,12 @@
           padding: 5px;
           float: left;
         }
-        a {
-          text-decoration: white;
-          color: black;
-        }
-        a:hover {
-            color: lightcyan;
-        }
     </style>
 </head>
 <body>
     <div class="main">
         <div class="inner">
-            <div class="GET">
-                <p>To get all pets use: <a href="http://0.0.0.0:5000/pets">http://0.0.0.0:5000/pets</a></p>
-            </div>
-            <div class="POST">
-                <p>To post a new pets use:  <a href="http://0.0.0.0:5000/pets">http://0.0.0.0:5000/pets</a></p>
-            </div>
-            <div class="PUT">
-                <p>To update a new pets use:  <a href="http://0.0.0.0:5000/pets/<id>">http://0.0.0.0:5000/pets/product_id</a></p>
-            </div>
-            <div class="DELETE">
-                <p>To delete a new pets use:  <a href="http://0.0.0.0:5000/pets/<id>">http://0.0.0.0:5000/pets/product_id</a></p>
-            </div>
+            <p>You have successfully adopted a <b>{{ name }} pet</b></p>
         </div>
     </div>
 </body>

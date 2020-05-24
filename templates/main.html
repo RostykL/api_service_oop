@@ -20,7 +20,7 @@
           grid-template-columns: 1fr 1fr 1fr;
           grid-gap: 1vw;
           background-color: lightcyan;
-          height: 400px;
+          height: 100vh;
           overflow-y: scroll;
 
         }
@@ -40,6 +40,8 @@
                 <p>desc: {{ data[x].description }}</p>
                 <p>lost location: {{ data[x].location }}</p>
                 <p>type: {{ data[x].animal_type }}</p>
+                <p>id for adoption: {{ data[x].id }}</p>
+                <p>http://0.0.0.0:5000/adopt/id/ to adopt me</p>
             </div>
         {% endfor %}
     </div>

@@ -6,7 +6,7 @@ from config import db, ma
 connex_app = config.connex_app
 
 
-
+# Модель нашої тварини, яка зберігається в нашій базі даних
 
 
 # Animal Class/Model
@@ -16,7 +16,7 @@ class Animal(db.Model):
     description = db.Column(db.String(200))
     animal_type = db.Column(db.String(20))
     location = db.Column(db.String(200))
-    hasOwner = db.Column(db.String(200), default="No Owner")
+    hasOwner = db.Column(db.Boolean, default=False)
     status = db.Column(db.Boolean, default=False)
 
     def __init__(self, name, description, animal_type, location, hasOwner, status):
@@ -72,7 +72,7 @@ def post_animal(id):
     return animal_schema.jsonify(animal)
 
 
-# Update a l
+# Update an Animal
 @connex_app.route('/pets/<id>/', methods=['PUT'])
 def update_animal(id):
     animal = Animal.query.get(id)
